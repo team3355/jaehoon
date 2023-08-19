@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "storage": {
+      "dynamodbitems": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

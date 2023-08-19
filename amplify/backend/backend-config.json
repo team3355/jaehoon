@@ -1,0 +1,132 @@
+{
+  "api": {
+    "amplifyworkshopapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "AmplifyWorkshopLambdaItems"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "apigpt": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "askChatgptLambda"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "EcommerceAuth": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "ADDRESS",
+          "EMAIL",
+          "FAMILY_NAME",
+          "GIVEN_NAME",
+          "PHONE_NUMBER"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "AmplifyWorkshopLambdaItems": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "dynamodbitems"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "askChatgptLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_AmplifyWorkshopLambdaItems_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AmplifyWorkshopLambdaItems"
+        }
+      ]
+    },
+    "AMPLIFY_function_AmplifyWorkshopLambdaItems_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AmplifyWorkshopLambdaItems"
+        }
+      ]
+    },
+    "AMPLIFY_function_askChatgptLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "askChatgptLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_askChatgptLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "askChatgptLambda"
+        }
+      ]
+    }
+  },
+  "predictions": {
+    "speechGenerator": {
+      "convertType": "speechGenerator",
+      "providerPlugin": "awscloudformation",
+      "service": "Polly"
+    }
+  },
+  "storage": {
+    "dynamodbitems": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
+  }
+}

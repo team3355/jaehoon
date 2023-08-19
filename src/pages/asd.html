@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>진단서 번역</title>
+    <title>진단서 번역</title>
+    <style>
+        /* styles.css */
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body background and text styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Container */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styles */
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="button"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+/* Translated content */
+h2 {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>진단서 번역</h1>
+        <form id="medicalCertificateForm">
+            <label for="patientName">환자 이름:</label>
+            <input type="text" id="patientName" required><br>
+
+            <label for="onsetDate">발병일:</label>
+            <input type="text" id="onsetDate" required><br>
+
+            <label for="diagnosis">진단명:</label>
+            <input type="text" id="diagnosis" required><br>
+
+            <label for="treatment">치료 내용:</label>
+            <input type="text" id="treatment" required><br>
+
+            <label for="futureTreatment">향후 치료 계획:</label>
+            <input type="text" id="futureTreatment" required><br>
+
+            <label for="nextAppointment">다음 예약일:</label>
+            <input type="text" id="nextAppointment" required><br>
+
+            <button type="button" id="translateButton">번역하기</button>
+        </form>
+
+        <h2>번역된 내용</h2>
+        <textarea id="translatedContent" rows="6" cols="50" readonly></textarea>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const translateButton = document.getElementById("translateButton");
+    translateButton.addEventListener("click", getTranslate);
+});
+
+async function getTranslate() {
+    try {
+        const patientName = document.getElementById("patientName").value;
+        const onsetDate = document.getElementById("onsetDate").value;
+        const diagnosis = document.getElementById("diagnosis").value;
+        const treatment = document.getElementById("treatment").value;
+        const futureTreatment = document.getElementById("futureTreatment").value;
+        const nextAppointment = document.getElementById("nextAppointment").value;
+
+        const response = await fetch("http://localhost:3001/translate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                patientName,
+                onsetDate,
+                diagnosis,
+                treatment,
+                futureTreatment,
+                nextAppointment,
+            }),
+        });
+
+        const data = await response.json();
+        console.log(data);
+        const translatedContent = data.assistant;
+        document.getElementById("translatedContent").value = translatedContent;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+    </script>
+</body>
+</html>

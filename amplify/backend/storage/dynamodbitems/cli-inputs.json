@@ -1,0 +1,10 @@
+{
+  "resourceName": "dynamodbitems",
+  "tableName": "amplifyworkshopitems",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
