@@ -57,6 +57,7 @@ const styles = {
         border: '1px solid #ccc',
         borderRadius: '5px',
         backgroundColor: '#f9f9f9',
+        height: '200px',
     },
 };
 
@@ -118,7 +119,7 @@ const MedicalCertificate = () => {
                 <button type="button" onClick={getTranslate} style={styles.button}>번역하기</button>
             </form>
 
-            <h2 style={styles.h2}>번역된 내용</h2>
+            <h2 style={styles.h2}>번역본</h2>
             <textarea id="translatedContent" value={translatedContent} readOnly style={styles.textarea}></textarea>
         </div>
     );
