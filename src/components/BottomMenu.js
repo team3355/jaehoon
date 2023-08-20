@@ -16,7 +16,7 @@ function BottomMenu() {
         <div>
             <Dropdown text='Menu' pointing='top left' style={dropdownStyle}>
                 <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="/transcribe" icon='pencil' text='Transcribe' />
+                    <Dropdown.Item as={Link} to="/Polly" icon='pencil' text='Polly' />
                     <Dropdown.Item as={Link} to="/reko" icon='pencil' text='Reko' />
                 </Dropdown.Menu>
             </Dropdown>
